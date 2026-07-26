@@ -1,0 +1,21 @@
+# Core Python environment
+python-dotenv
+requests
+
+# Hugging Face
+huggingface_hub
+transformers
+torch
+
+# LangChain ecosystem
+langchain
+langchain-community
+langchain-openai
+langchain-google-genai
+langchain-mistralai
+langchain_huggingface
+
+# Optional utilities
+uvicorn
+fastapi
+flask
