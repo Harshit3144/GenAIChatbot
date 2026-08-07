@@ -1,17 +1,23 @@
 import os
 from dotenv import load_dotenv
-from langchain.chat_models import init_chat_model
-from langchain.messages import HumanMessage, SystemMessage
+from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
+from langchain_core.messages import HumanMessage, SystemMessage
 
 load_dotenv()
 
-model = init_chat_model("deepseek-ai/DeepSeek-V4-Flash", api_key=os.getenv("HUGGINGFACEHUB_API_TOKEN"))
+llm = HuggingFaceEndpoint(
+    repo_id="deepseek-ai/DeepSeek-V4-Flash",
+    huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN")
+)
 
-system_msg = SystemMessage("You are a helpful assistant.")
-human_msg = HumanMessage("Hello, how are you?")
+model = ChatHuggingFace(llm=llm)
+
+print("----Press 0 to exit----")
+system_msg = SystemMessage(content="you are lover type person and talk like you are love with someone and express love in poetic way.")
+human_msg = HumanMessage(content="\n\n Hello, how are you?\n\n tell me about yourself?")
 
 # Use with chat models
 messages = [system_msg, human_msg]
-response = model.invoke(messages)  # Returns AIMessage
+response = model.invoke(messages) 
 
 print(response.content)
