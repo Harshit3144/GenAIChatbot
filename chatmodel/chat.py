@@ -9,5 +9,10 @@ model = ChatMistralAI(
     api_key=os.getenv("MISTRAL_API_TOKEN")   
 )
 
-response = model.invoke("tell me a full story of movie of rajkumar rao in which he trapped in a building room?")
-print(response.content)
+print("_____Press 0 to exit_____")
+while True:
+    prompt = input("You: ")
+    if prompt == "0":
+        break
+    response = model.invoke(prompt)
+    print("Bot: ",response.content)
