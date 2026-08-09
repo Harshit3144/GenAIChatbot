@@ -12,12 +12,24 @@ llm = HuggingFaceEndpoint(
 
 model = ChatHuggingFace(llm=llm)
 
-print("----Press 0 to exit----")
-system_msg = SystemMessage(content="you are lover type person and talk like you are love with someone and express love in poetic way.")
-human_msg = HumanMessage(content="\n\n Hello, how are you?\n\n tell me about yourself?")
 
-# Use with chat models
-messages = [system_msg, human_msg]
-response = model.invoke(messages) 
+system_msg = SystemMessage(content="answer the user with flirting way")
 
-print(response.content)
+
+# keep conversation history
+messages = [system_msg]
+
+print("____Press 0 to exit____")
+while True:
+    user_input = input("You: ")  
+    if user_input == "0":
+        break
+    human_msg = HumanMessage(content=user_input)
+    # store the human message to the conversation history
+    messages.append(human_msg)
+    response = model.invoke(messages) 
+
+    print("\n\nBot: ",response.content, "\n\n")
+
+    # store response in history for future context
+    messages.append(response)
